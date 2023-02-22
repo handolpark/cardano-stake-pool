@@ -59,10 +59,186 @@
 ** Installing ~cardano-node~
 
 #+begin_src shell
-  curl -LO https://developers.cardano.org/docs/get-started/installing-cardano-node/#macos
+  curl -LO https://update-cardano-mainnet.iohk.io/cardano-node-releases/cardano-node-1.35.4-macos.tar.gz
+  tar --one-top-level=cardano -xvzf cardano-node-1.35.4-macos.tar.gz
+  ls -lF cardano
 #+end_src
 
 #+RESULTS:
+| ./                                                                       |        |            |       |          |     |   |       |                                      |
+| ./libz.dylib                                                             |        |            |       |          |     |   |       |                                      |
+| ./libffi.8.dylib                                                         |        |            |       |          |     |   |       |                                      |
+| ./cardano-testnet                                                        |        |            |       |          |     |   |       |                                      |
+| ./cardano-topology                                                       |        |            |       |          |     |   |       |                                      |
+| ./configuration/                                                         |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/                                                |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/shelley-only/                                   |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/shelley-only/configuration.yaml                 |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/defaults/                                       |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/defaults/simpleview/                            |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/defaults/simpleview/config-2.yaml               |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/defaults/simpleview/topology-node-0.json        |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/defaults/simpleview/topology-node-1.json        |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/defaults/simpleview/topology-node-2.json        |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/defaults/simpleview/config-0.yaml               |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/defaults/simpleview/config-1.yaml               |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/byron-shelley/                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/chairman/byron-shelley/configuration.yaml                |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/                                                |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-mainnet/                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-mainnet/genesis.json                      |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-mainnet/configuration.yaml                |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-mainnet/topology.json                     |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/simpleview/                                     |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/simpleview/config-2.yaml                        |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/simpleview/topology-node-0.json                 |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/simpleview/topology-node-1.json                 |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/simpleview/topology-node-2.json                 |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/simpleview/config-0.yaml                        |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/simpleview/config-1.yaml                        |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/mainnet-via-fetcher/                            |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/mainnet-via-fetcher/genesis.json                |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/mainnet-via-fetcher/configuration.yaml          |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/mainnet-via-fetcher/topology.json               |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/mainnet-silent/                                 |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/mainnet-silent/genesis.json                     |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/mainnet-silent/configuration.yaml               |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/mainnet-silent/topology.json                    |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/simple-dns/                                     |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/simple-dns/topology.json                        |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/excommunicated/                                 |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/excommunicated/topology.json                    |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-staging/                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-staging/genesis.json                      |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-staging/configuration.yaml                |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-staging/topology.json                     |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-testnet/                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-testnet/genesis.json                      |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-testnet/configuration.yaml                |        |            |       |          |     |   |       |                                      |
+| ./configuration/defaults/byron-testnet/topology.json                     |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/                                                 |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/mainnet-p2p-toplogy.json                         |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/update-config-files.sh                           |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/mainnet-shelley-genesis.json                     |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/membench-config-new.yaml                         |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/shelley_qa-byron-genesis.json                    |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/testnet-config.json                              |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/testnet-topology.json                            |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/mainnet-config-new-tracing.yaml                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/shelley_qa-config.json                           |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/testnet-alonzo-genesis.json                      |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/mainnet-alonzo-genesis.json                      |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/alonzo/                                          |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/alonzo/shelley_qa_cost-model.json                |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/mainnet-config.json                              |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/testnet-shelley-genesis.json                     |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/mainnet-topology.json                            |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/mainnet-byron-genesis.json                       |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/shelley_qa-topology.json                         |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/mainnet-config.yaml                              |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/testnet-byron-genesis.json                       |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/shelley_qa-alonzo-genesis.json                   |        |            |       |          |     |   |       |                                      |
+| ./configuration/cardano/shelley_qa-shelley-genesis.json                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/                                              |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/system-start.txt                              |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/genesis.json                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/shelley-staging-genesis.json                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key3.sk                                       |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/shelley-staging-short-genesis.json            |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key5.sk.lock                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/log-config-cluster.yaml                       |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key2.sk                                       |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key4.sk.lock                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key6.sk                                       |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key6.sk.lock                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/hash.txt                                      |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/mainnet-staging-short-epoch-genesis.json      |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/testnet-genesis.json                          |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key2.sk.lock                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/configuration.yaml                            |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/generate.sh                                   |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key3.sk.lock                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key1.sk                                       |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key5.sk                                       |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key1.sk.lock                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key4.sk                                       |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key0.sk.lock                                  |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/mainnet-genesis-dryrun-with-stakeholders.json |        |            |       |          |     |   |       |                                      |
+| ./configuration/mainnet-ci/key0.sk                                       |        |            |       |          |     |   |       |                                      |
+| ./trace-dispatcher-examples                                              |        |            |       |          |     |   |       |                                      |
+| ./libcharset.1.dylib                                                     |        |            |       |          |     |   |       |                                      |
+| ./bech32                                                                 |        |            |       |          |     |   |       |                                      |
+| ./cardano-node                                                           |        |            |       |          |     |   |       |                                      |
+| ./libiconv-nocharset.dylib                                               |        |            |       |          |     |   |       |                                      |
+| ./cardano-node-chairman                                                  |        |            |       |          |     |   |       |                                      |
+| ./stake-credential-history                                               |        |            |       |          |     |   |       |                                      |
+| ./scan-blocks                                                            |        |            |       |          |     |   |       |                                      |
+| ./tx-generator                                                           |        |            |       |          |     |   |       |                                      |
+| ./libssl.3.dylib                                                         |        |            |       |          |     |   |       |                                      |
+| ./cardano-tracer                                                         |        |            |       |          |     |   |       |                                      |
+| ./plutus-example                                                         |        |            |       |          |     |   |       |                                      |
+| ./demo-acceptor                                                          |        |            |       |          |     |   |       |                                      |
+| ./libcrypto.3.dylib                                                      |        |            |       |          |     |   |       |                                      |
+| ./libsecp256k1.0.dylib                                                   |        |            |       |          |     |   |       |                                      |
+| ./locli                                                                  |        |            |       |          |     |   |       |                                      |
+| ./db-synthesizer                                                         |        |            |       |          |     |   |       |                                      |
+| ./db-analyser                                                            |        |            |       |          |     |   |       |                                      |
+| ./libiconv.dylib                                                         |        |            |       |          |     |   |       |                                      |
+| ./libsodium.23.dylib                                                     |        |            |       |          |     |   |       |                                      |
+| ./db-converter                                                           |        |            |       |          |     |   |       |                                      |
+| ./cardano-ping                                                           |        |            |       |          |     |   |       |                                      |
+| ./ledger-state                                                           |        |            |       |          |     |   |       |                                      |
+| ./scan-blocks-pipelined                                                  |        |            |       |          |     |   |       |                                      |
+| ./chain-sync-client-with-ledger-state                                    |        |            |       |          |     |   |       |                                      |
+| ./demo-forwarder                                                         |        |            |       |          |     |   |       |                                      |
+| ./libgmp.10.dylib                                                        |        |            |       |          |     |   |       |                                      |
+| ./cardano-cli                                                            |        |            |       |          |     |   |       |                                      |
+| ./cardano-submit-api                                                     |        |            |       |          |     |   |       |                                      |
+| total                                                                    | 667800 |            |       |          |     |   |       |                                      |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |  2928132 | Dec | 2 | 11:29 | bech32*                              |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 57263760 | Dec | 2 | 11:29 | cardano-cli*                         |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 74806568 | Dec | 2 | 11:29 | cardano-node*                        |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 49518416 | Dec | 2 | 11:29 | cardano-node-chairman*               |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |  3949432 | Dec | 2 | 11:29 | cardano-ping*                        |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 48149912 | Dec | 2 | 11:29 | cardano-submit-api*                  |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 11112212 | Dec | 2 | 11:29 | cardano-testnet*                     |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |  6620932 | Dec | 2 | 11:29 | cardano-topology*                    |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 15866108 | Dec | 2 | 11:29 | cardano-tracer*                      |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 44242268 | Dec | 2 | 11:29 | chain-sync-client-with-ledger-state* |
+| drwxr-xr-x                                                               |      6 | handolpark | staff |      192 | Dec | 2 | 11:29 | configuration/                       |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 46571932 | Dec | 2 | 11:29 | db-analyser*                         |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |  4319672 | Dec | 2 | 11:29 | db-converter*                        |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 45879800 | Dec | 2 | 11:29 | db-synthesizer*                      |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |  5982712 | Dec | 2 | 11:29 | demo-acceptor*                       |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |  5454960 | Dec | 2 | 11:29 | demo-forwarder*                      |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 44305052 | Dec | 2 | 11:29 | ledger-state*                        |
+| -rw-r--r--                                                               |      1 | handolpark | staff |     9596 | Dec | 2 | 11:29 | libcharset.1.dylib                   |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |  3973952 | Dec | 2 | 11:29 | libcrypto.3.dylib*                   |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |    38548 | Dec | 2 | 11:29 | libffi.8.dylib*                      |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |   651728 | Dec | 2 | 11:29 | libgmp.10.dylib*                     |
+| -rw-r--r--                                                               |      1 | handolpark | staff |   954144 | Dec | 2 | 11:29 | libiconv-nocharset.dylib             |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |     4200 | Dec | 2 | 11:29 | libiconv.dylib*                      |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |  1326400 | Dec | 2 | 11:29 | libsecp256k1.0.dylib*                |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |   729452 | Dec | 2 | 11:29 | libsodium.23.dylib*                  |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |   635288 | Dec | 2 | 11:29 | libssl.3.dylib*                      |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |   101124 | Dec | 2 | 11:29 | libz.dylib*                          |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |  8242572 | Dec | 2 | 11:29 | locli*                               |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |  7624400 | Dec | 2 | 11:29 | plutus-example*                      |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 40254516 | Dec | 2 | 11:29 | scan-blocks*                         |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 40262260 | Dec | 2 | 11:29 | scan-blocks-pipelined*               |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 45475052 | Dec | 2 | 11:29 | stake-credential-history*            |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff |  6093712 | Dec | 2 | 11:29 | trace-dispatcher-examples*           |
+| -rwxr-xr-x                                                               |      1 | handolpark | staff | 60405292 | Dec | 2 | 11:29 | tx-generator*                        |
+
+#+begin_src shell
+  file cardano/cardano-node
+#+end_src
+
+#+RESULTS:
+| cardano/cardano-node: Mach-O 64-bit x86_64 executable | flags:<NOUNDEFS | DYLDLINK | TWOLEVEL | PIE | HAS_TLV_DESCRIPTORS> |
+
+** Running
+
 
 
 * TODO pre-built binary in a docker container 
