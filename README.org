@@ -237,8 +237,50 @@
 #+RESULTS:
 | cardano/cardano-node: Mach-O 64-bit x86_64 executable | flags:<NOUNDEFS | DYLDLINK | TWOLEVEL | PIE | HAS_TLV_DESCRIPTORS> |
 
-** Running
+** Fetching the configs
 
+Fetching the configs for preprod.
+
+#+begin_src shell
+  mkdir -p config
+  cd config
+  curl -O -J https://book.world.dev.cardano.org/environments/preprod/config.json
+  curl -O -J https://book.world.dev.cardano.org/environments/preprod/db-sync-config.json
+  curl -O -J https://book.world.dev.cardano.org/environments/preprod/submit-api-config.json
+  curl -O -J https://book.world.dev.cardano.org/environments/preprod/topology.json
+  curl -O -J https://book.world.dev.cardano.org/environments/preprod/byron-genesis.json
+  curl -O -J https://book.world.dev.cardano.org/environments/preprod/shelley-genesis.json
+  curl -O -J https://book.world.dev.cardano.org/environments/preprod/alonzo-genesis.json
+  cd ..
+#+end_src
+
+#+RESULTS:
+
+#+begin_src shell
+  ls -lF config
+#+end_src
+
+#+RESULTS:
+| total      | 40 |            |       |      |     |    |       |                        |
+| -rw-r--r-- |  1 | handolpark | staff | 9459 | Feb | 21 | 19:08 | alonzo-genesis.json    |
+| -rw-r--r-- |  1 | handolpark | staff | 5607 | Feb | 21 | 19:08 | byron-genesis.json     |
+| -rw-r--r-- |  1 | handolpark | staff | 2891 | Feb | 21 | 19:08 | config.json            |
+| -rw-r--r-- |  1 | handolpark | staff | 2524 | Feb | 21 | 19:08 | db-sync-config.json    |
+| -rw-r--r-- |  1 | handolpark | staff | 2759 | Feb | 21 | 19:08 | shelley-genesis.json   |
+| -rw-r--r-- |  1 | handolpark | staff | 2546 | Feb | 21 | 19:08 | submit-api-config.json |
+| -rw-r--r-- |  1 | handolpark | staff |  454 | Feb | 21 | 19:08 | topology.json          |
+
+** Running the node
+
+#+begin_src shell
+  ./cardano/cardano-node run \
+     --topology config/topology.json \
+     --database-path run/db \
+     --socket-path run/node.socket \
+     --host-addr 0.0.0.0 \
+     --port 3001 \
+     --config config/config.json
+#+end_src
 
 
 * TODO pre-built binary in a docker container 
