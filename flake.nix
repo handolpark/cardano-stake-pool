@@ -28,8 +28,9 @@
 
         devShells = {
           default = pkgs.mkShell {
-            nativeBuildInputs = [
-              pkgs.wget
+            nativeBuildInputs = with pkgs; [
+              wget
+              kubectl
             ];};
         };
       };

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cardano-node-deployment
+  labels:
+    app: cardano-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cardano-node
+  template:
+    metadata:
+      labels:
+        app: cardano-node
+    spec:
+      containers:
+        - name: cardano-node
+          image: inputoutput/cardano-node:1.35.5
+          env:
+            - name: NETWORK
+              value: testnet

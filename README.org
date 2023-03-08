@@ -285,6 +285,23 @@ Fetching the configs for preprod.
 
 * TODO pre-built binary in a docker container 
 
-
-
 * TODO binary built from the source in a docker container
+
+* TODO run cardano-node in k8s
+
+- cardano-node docker image
+  https://hub.docker.com/r/inputoutput/cardano-node
+  inputoutput/cardano-node:1.35.5
+
+- volumes:
+  - node-db
+  - node-ipc
+
+- environment variables:
+  - NETWORK=mainnet
+
+- No container logs in Cloud Logging Viewer
+  logging.googleapis.com was not enabled by default.
+
+- query filter to see container logs
+  resource.type="k8s_container"
