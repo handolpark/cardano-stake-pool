@@ -20,3 +20,10 @@ spec:
           env:
             - name: NETWORK
               value: testnet
+          volumeMounts:
+            - name: cardano-node-data-volume
+              mountPath: /data
+      volumes:
+        - name: cardano-node-data-volume
+          persistentVolumeClaim:
+            claimName: cardano-node-data-volumeclaim
