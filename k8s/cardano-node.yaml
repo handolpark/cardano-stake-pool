@@ -15,15 +15,125 @@ spec:
         app: cardano-node
     spec:
       containers:
+        # - name: bash
+        #   image: bash
+        #   args:
+        #     - "-c"
+        #     - "while true; do sleep 1; echo 'tick'; done"
+        #   volumeMounts:
+        #     - name: cardano-node-config-volume
+        #       mountPath: /configuration
+        #     - name: cardano-node-data-volume
+        #       mountPath: /data
         - name: cardano-node
           image: inputoutput/cardano-node:1.35.5
-          env:
-            - name: NETWORK
-              value: testnet
+          resources:
+            requests:
+              cpu: "2"
+          args:
+            - "run"
+            - "--config"
+            - "/configuration/config.json"
+            - "--topology"
+            - "/configuration/topology.json"
+            - "--database-path"
+            - "/data/db"
           volumeMounts:
+            - name: cardano-node-config-volume
+              mountPath: /configuration
+            - name: cardano-node-data-volume
+              mountPath: /data
+      initContainers:
+        - name: fetch-snapshot
+          image: bash:latest
+          args:
+            - bash
+            - /app/initialize-cardano-node.sh
+          env:
+            - name: ENVNAME
+              value: preprod
+          volumeMounts:
+            - name: cardano-node-init-script
+              mountPath: /app
+            - name: cardano-node-config-volume
+              mountPath: /configuration
             - name: cardano-node-data-volume
               mountPath: /data
       volumes:
+        - name: cardano-node-config-volume
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: cardano-node-config-volume
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "standard"
+                resources:
+                  requests:
+                    storage: 5Gi
         - name: cardano-node-data-volume
-          persistentVolumeClaim:
-            claimName: cardano-node-data-volumeclaim
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: cardano-node-data-volume
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "standard"
+                resources:
+                  requests:
+                    storage: 20Gi
+        - name: cardano-node-init-script
+          configMap:
+            name: cardano-node-init-script-configmap
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cardano-node-init-script-configmap
+data:
+  initialize-cardano-node.sh: |
+    #!/usr/bin/env bash
+
+    set -e -x -o pipefail
+
+    apk add --no-cache curl jq lz4 tar
+
+    ENVNAME="${ENVNAME:-preprod}"
+
+    echo "Fetching configuration files for '${ENVNAME}'"
+
+    CONFIG_BASE_URL="https://book.world.dev.cardano.org/environments/${ENVNAME}"
+
+    FILE_LIST=(
+        "config.json"
+        "db-sync-config.json"
+        "submit-api-config.json"
+        "topology.json"
+        "byron-genesis.json"
+        "shelley-genesis.json"
+        "alonzo-genesis.json"
+    )
+
+    for file in "${FILE_LIST[@]}"
+    do
+        curl -o "/configuration/${file}" "${CONFIG_BASE_URL}/${file}"
+    done
+
+    CARDANO_NETWORK="${ENVNAME}"
+    [[ ${CARDANO_NETWORK} == "preprod" ]] && CARDANO_NETWORK=testnet
+
+    # echo "Fetching the snapshot of '${CARDANO_NETWORK}'"
+
+    # __BASE_URL='https://downloads.csnapshots.io/snapshots'
+    # __META_FILENAME="${CARDANO_NETWORK}-db-snapshot.json"
+
+    # curl -o /tmp/snapshot.json -s --show-error \
+    #     ${__BASE_URL}/${CARDANO_NETWORK}/${CARDANO_NETWORK}-db-snapshot.json
+    # cat /tmp/snapshot.json
+    # __SNAPSHOT_FILENAME=$(jq -r '.[].file_name' /tmp/snapshot.json)
+
+    # curl -o - --no-progress-meter ${__BASE_URL}/${CARDANO_NETWORK}/${__SNAPSHOT_FILENAME} \
+    #  | lz4 -c -d - \
+    #  | tar -x -C /data
