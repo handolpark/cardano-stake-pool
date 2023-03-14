@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cardano-node-mainnet-deployment
+  labels:
+    app: cardano-node-mainnet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cardano-node-mainnet
+  template:
+    metadata:
+      labels:
+        app: cardano-node-mainnet
+    spec:
+      containers:
+        - name: gcloud
+          image: google/cloud-sdk:latest
+          command: [ "bash" ]
+          args:
+            - "-c"
+            - "while true; do sleep 10; echo 'tick'; done"
+          volumeMounts:
+            - name: scratch-volume
+              mountPath: /opt/scratch
+            - name: cardano-node-data-volume
+              mountPath: /data
+        - name: cardano-node
+          image: inputoutput/cardano-node:1.35.5
+          resources:
+            requests:
+              cpu: "2"
+              memory: "16Gi"
+          args:
+            - "run"
+            - "--config"
+            - "/opt/cardano/config/mainnet-config.json"
+            - "--topology"
+            - "/opt/cardano/config/mainnet-topology.json"
+            - "--database-path"
+            - "/data/db"
+          volumeMounts:
+            - name: cardano-node-data-volume
+              mountPath: /data
+      volumes:
+        - name: scratch-volume
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: scratch-volume
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "standard"
+                resources:
+                  requests:
+                    storage: 100Gi
+        - name: cardano-node-data-volume
+          persistentVolumeClaim:
+            claimName: cardano-node-data-mainnet-volume
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cardano-node-data-mainnet-volume
+spec:
+  storageClassName: standard
+  accessModes: [ "ReadWriteOnce" ]
+  resources:
+    requests:
+      storage: 200Gi
