@@ -15,16 +15,19 @@ spec:
         app: cardano-node
     spec:
       containers:
-        # - name: bash
-        #   image: bash
-        #   args:
-        #     - "-c"
-        #     - "while true; do sleep 1; echo 'tick'; done"
-        #   volumeMounts:
-        #     - name: cardano-node-config-volume
-        #       mountPath: /configuration
-        #     - name: cardano-node-data-volume
-        #       mountPath: /data
+        - name: bash
+          image: google/cloud-sdk:latest
+          command: [ "bash" ]
+          args:
+            - "-c"
+            - "while true; do sleep 1; echo 'tick'; done"
+          volumeMounts:
+            - name: bash-data-volume
+              mountPath: /opt/data
+            - name: cardano-node-config-volume
+              mountPath: /configuration
+            - name: cardano-node-data-volume
+              mountPath: /data
         - name: cardano-node
           image: inputoutput/cardano-node:1.35.5
           resources:
@@ -60,6 +63,18 @@ spec:
             - name: cardano-node-data-volume
               mountPath: /data
       volumes:
+        - name: bash-data-volume
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  type: bash-data-volume
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "standard"
+                resources:
+                  requests:
+                    storage: 200Gi
         - name: cardano-node-config-volume
           ephemeral:
             volumeClaimTemplate:
