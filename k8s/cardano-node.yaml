@@ -20,12 +20,10 @@ spec:
           command: [ "bash" ]
           args:
             - "-c"
-            - "while true; do sleep 1; echo 'tick'; done"
+            - "while true; do sleep 10; date; done"
           volumeMounts:
-            - name: bash-data-volume
-              mountPath: /opt/data
-            - name: cardano-node-config-volume
-              mountPath: /configuration
+            - name: scratch-volume
+              mountPath: /opt/scratch
             - name: cardano-node-data-volume
               mountPath: /data
         - name: cardano-node

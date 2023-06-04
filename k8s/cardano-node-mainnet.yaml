@@ -20,7 +20,7 @@ spec:
           command: [ "bash" ]
           args:
             - "-c"
-            - "while true; do sleep 10; echo 'tick'; done"
+            - "while true; do sleep 10; date; done"
           volumeMounts:
             - name: scratch-volume
               mountPath: /opt/scratch
